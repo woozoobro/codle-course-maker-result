@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <title>코스 0 - 간접적 교육 가치</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React 라이브러리 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <style>
+    
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-1Thin.woff2') format('woff2');
+      font-weight: 100;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-2ExtraLight.woff2') format('woff2');
+      font-weight: 200;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-3Light.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-4Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-5Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-6SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-7Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-8ExtraBold.woff2') format('woff2');
+      font-weight: 800;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-9Black.woff2') format('woff2');
+      font-weight: 900;
+      font-style: normal;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Paperlogy', system-ui, -apple-system, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    // React와 ReactDOM이 로드될 때까지 대기
+    const waitForReact = () => {
+      return new Promise((resolve) => {
+        const check = () => {
+          if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined') {
+            resolve();
+          } else {
+            setTimeout(check, 10);
+          }
+        };
+        check();
+      });
+    };
+
+    waitForReact().then(() => {
+      try {
+        // React hooks를 window 객체에 바인딩 (iframe 내부에서 접근 가능하도록)
+        window.React = React;
+        window.useState = React.useState;
+        window.useEffect = React.useEffect;
+        window.useRef = React.useRef;
+        window.useCallback = React.useCallback;
+        window.useMemo = React.useMemo;
+        window.useContext = React.useContext;
+        window.useReducer = React.useReducer;
+        window.useLayoutEffect = React.useLayoutEffect;
+
+        // 유용한 JavaScript 함수들을 전역으로 노출
+        window.Math = Math;
+        window.Date = Date;
+        window.setTimeout = setTimeout;
+        window.setInterval = setInterval;
+        window.clearTimeout = clearTimeout;
+        window.clearInterval = clearInterval;
+        window.requestAnimationFrame = requestAnimationFrame;
+        window.cancelAnimationFrame = cancelAnimationFrame;
+
+        // 자주 사용되는 유틸리티 함수들 추가
+        window.getPosition = (angle, radius, rotation = 0) => {
+          const rad = (angle * Math.PI) / 180;
+          const x = radius * Math.cos(rad);
+          const y = radius * Math.sin(rad);
+          return {
+            transform: `translate(${x}px, ${y}px) rotate(${rotation}deg)`
+          };
+        };
+
+        // 애니메이션 관련 헬퍼
+        window.animate = {
+          spring: (value, config = {}) => {
+            const { stiffness = 100, damping = 10 } = config;
+            return `transition: all ${damping/10}s cubic-bezier(0.68, -0.55, 0.265, 1.55)`;
+          },
+          stagger: (index, baseDelay = 100) => {
+            return index * baseDelay;
+          }
+        };
+
+        // IIFE로 래핑된 코드 실행하여 컴포넌트 가져오기
+        const Component = (function() {
+  // React Hooks 바인딩
+  const { useState, useEffect, useRef, useCallback, useMemo, useContext, useReducer, useLayoutEffect } = window;
+
+  // 자주 사용되는 전역 객체/함수들을 로컬 스코프에 바인딩
+  const { Math, Date, setTimeout, setInterval, clearTimeout, clearInterval, requestAnimationFrame, cancelAnimationFrame } = window;
+
+  // 커스텀 유틸리티 함수들 (있는 경우)
+  const getPosition = window.getPosition;
+  const animate = window.animate;
+
+  "use client";
+function AILiteracyIndirectValue() {
+    const [mounted, setMounted] = useState(false);
+    const [showCase, setShowCase] = useState(false);
+    useEffect(()=>{
+        requestAnimationFrame(()=>{
+            requestAnimationFrame(()=>{
+                setMounted(true);
+            });
+        });
+    }, []);
+    // 1. 역량 데이터를 배열로 관리 (원 경계 배치)
+    // 1차 링 - 직접적 역량 (그린 계열) - 그린 원 경계에 정확히 배치
+    const directCompetencies = [
+        {
+            name: '문제 해결',
+            color: 'green',
+            top: '30%',
+            left: '50%',
+            rotation: 0
+        },
+        {
+            name: '비판적 사고',
+            color: 'green',
+            top: '50%',
+            left: '70%',
+            rotation: 0
+        },
+        {
+            name: '컴퓨팅 사고',
+            color: 'green',
+            top: '70%',
+            left: '50%',
+            rotation: 0
+        },
+        {
+            name: '정보 활용',
+            color: 'green',
+            top: '50%',
+            left: '30%',
+            rotation: 0
+        }
+    ];
+    // 2차 링 - 간접적 역량 (옐로우 계열) - 옐로우 원 경계에 균등 배치 (72도씩)
+    const indirectCompetencies = [
+        {
+            name: '자기주도성',
+            color: 'yellow',
+            top: '18%',
+            left: '50%',
+            rotation: 0
+        },
+        {
+            name: '메타인지',
+            color: 'yellow',
+            top: '35%',
+            left: '75%',
+            rotation: 0
+        },
+        {
+            name: '창의성',
+            color: 'yellow',
+            top: '65%',
+            left: '75%',
+            rotation: 0
+        },
+        {
+            name: '디지털 시민성',
+            color: 'yellow',
+            top: '82%',
+            left: '50%',
+            rotation: 0
+        },
+        {
+            name: '협업 능력',
+            color: 'yellow',
+            top: '35%',
+            left: '25%',
+            rotation: 0
+        }
+    ];
+    return /*#__PURE__*/ React.createElement("div", {
+        className: "h-screen w-screen overflow-hidden bg-white bg-[radial-gradient(circle,#e5e7eb_0.2px,transparent_1.8px)] bg-[length:60px_60px] relative"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: `absolute top-8 left-8 md:top-10 md:left-10 lg:top-12 lg:left-12 transition-all duration-700 ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`
+    }, /*#__PURE__*/ React.createElement("h1", {
+        className: "text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-2"
+    }, "간접적 교육 가치"), /*#__PURE__*/ React.createElement("p", {
+        className: "text-sm md:text-base lg:text-lg text-gray-600"
+    }, "AI Literacy 교육을 통해 함양하는 역량들")), /*#__PURE__*/ React.createElement("div", {
+        className: "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-6xl h-[500px] md:h-[600px] lg:h-[700px]"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "absolute inset-0"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: `absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ${mounted ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`,
+        style: {
+            animationDelay: '200ms'
+        }
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "w-[100px] h-[100px] md:w-[120px] md:h-[120px] lg:w-[140px] lg:h-[140px] border-2 border-blue-300 rounded-full animate-pulse"
+    })), /*#__PURE__*/ React.createElement("div", {
+        className: `absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ${mounted ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`,
+        style: {
+            animationDelay: '400ms'
+        }
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "w-[260px] h-[260px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] border-2 border-green-300/60 rounded-full"
+    })), /*#__PURE__*/ React.createElement("div", {
+        className: `absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ${mounted ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`,
+        style: {
+            animationDelay: '600ms'
+        }
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "w-[420px] h-[420px] md:w-[500px] md:h-[500px] lg:w-[580px] lg:h-[580px] border-2 border-yellow-300/50 rounded-full"
+    }))), /*#__PURE__*/ React.createElement("div", {
+        className: `absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`,
+        style: {
+            animationDelay: '100ms'
+        }
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "bg-blue-100 rounded-full w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center shadow-lg border-4 border-blue-300 cursor-pointer hover:bg-blue-200 hover:scale-105 transition-all duration-300",
+        onClick: ()=>setShowCase(true)
+    }, /*#__PURE__*/ React.createElement("h2", {
+        className: "text-lg md:text-xl lg:text-2xl font-bold text-blue-400 text-center"
+    }, "AI 리터러시"))), directCompetencies.map((item, index)=>{
+        const delay = 800 + index * 120;
+        return /*#__PURE__*/ React.createElement("div", {
+            key: index,
+            className: `absolute transition-all duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`,
+            style: {
+                top: item.top,
+                left: item.left,
+                transform: `translate(-50%, -50%)`,
+                transitionDelay: `${delay}ms`
+            }
+        }, /*#__PURE__*/ React.createElement("div", {
+            className: "bg-green-50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 lg:px-5 lg:py-3 shadow-md hover:scale-110 hover:shadow-lg transition-all duration-300"
+        }, /*#__PURE__*/ React.createElement("h3", {
+            className: "text-[11px] md:text-xs lg:text-sm font-bold text-green-400 text-center whitespace-nowrap"
+        }, item.name)));
+    }), indirectCompetencies.map((item, index)=>{
+        const delay = 1300 + index * 100;
+        return /*#__PURE__*/ React.createElement("div", {
+            key: index,
+            className: `absolute transition-all duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`,
+            style: {
+                top: item.top,
+                left: item.left,
+                transform: `translate(-50%, -50%)`,
+                transitionDelay: `${delay}ms`
+            }
+        }, /*#__PURE__*/ React.createElement("div", {
+            className: "bg-yellow-50 rounded-lg px-3 py-2 md:px-4 md:py-2.5 lg:px-5 lg:py-3 shadow-md hover:scale-110 hover:shadow-lg transition-all duration-300 opacity-90"
+        }, /*#__PURE__*/ React.createElement("h3", {
+            className: "text-[11px] md:text-xs lg:text-sm font-bold text-yellow-400 text-center whitespace-nowrap"
+        }, item.name)));
+    })), /*#__PURE__*/ React.createElement("div", {
+        className: `absolute top-1/2 right-8 md:right-12 lg:right-16 transform -translate-y-1/2 transition-all duration-500 ${showCase ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "bg-white rounded-xl shadow-xl w-80 md:w-96 p-6 relative"
+    }, /*#__PURE__*/ React.createElement("button", {
+        className: "absolute top-3 right-3 text-gray-400 hover:text-gray-600 transition-colors",
+        onClick: ()=>setShowCase(false)
+    }, /*#__PURE__*/ React.createElement("svg", {
+        className: "w-5 h-5",
+        fill: "none",
+        stroke: "currentColor",
+        viewBox: "0 0 24 24"
+    }, /*#__PURE__*/ React.createElement("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        strokeWidth: "2",
+        d: "M6 18L18 6M6 6l12 12"
+    }))), /*#__PURE__*/ React.createElement("div", {
+        className: "absolute top-1/2 -left-8 w-8 h-0.5 bg-gradient-to-r from-transparent to-blue-300"
+    }), /*#__PURE__*/ React.createElement("div", {
+        className: "mb-4"
+    }, /*#__PURE__*/ React.createElement("span", {
+        className: "text-blue-500 text-xs font-semibold tracking-wider"
+    }, "CASE STUDY"), /*#__PURE__*/ React.createElement("h3", {
+        className: "text-xl font-bold text-gray-800 mt-1"
+    }, "소크라테스 AI"), /*#__PURE__*/ React.createElement("p", {
+        className: "text-sm text-gray-600"
+    }, "중학교 AI 리터러시 교육"), /*#__PURE__*/ React.createElement("img", {
+        src: "https://bxjhuwbwryiibfsmdrbq.supabase.co/storage/v1/object/public/course-images/socra-example.jpg",
+        alt: "설명",
+        className: "rounded-lg mx-auto m-4"
+    })), /*#__PURE__*/ React.createElement("div", {
+        className: "bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-4"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "flex items-start gap-3"
+    }, /*#__PURE__*/ React.createElement("span", {
+        className: "text-2xl"
+    }, "💡"), /*#__PURE__*/ React.createElement("div", null, /*#__PURE__*/ React.createElement("p", {
+        className: "text-sm text-gray-700 leading-relaxed"
+    }, /*#__PURE__*/ React.createElement("span", {
+        className: "font-semibold"
+    }, "역발상 학습:"), " 학생이 AI에게 설명하며 학습")))), /*#__PURE__*/ React.createElement("div", {
+        className: "space-y-2"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "flex items-center gap-2"
+    }, /*#__PURE__*/ React.createElement("span", {
+        className: "w-2 h-2 bg-green-400 rounded-full"
+    }), /*#__PURE__*/ React.createElement("p", {
+        className: "text-sm text-gray-700"
+    }, "자발적으로 책 찾고 검색")), /*#__PURE__*/ React.createElement("div", {
+        className: "flex items-center gap-2"
+    }, /*#__PURE__*/ React.createElement("span", {
+        className: "w-2 h-2 bg-yellow-400 rounded-full"
+    }), /*#__PURE__*/ React.createElement("p", {
+        className: "text-sm text-gray-700"
+    }, "설명 욕구와 점수 향상 동기")), /*#__PURE__*/ React.createElement("div", {
+        className: "flex items-center gap-2"
+    }, /*#__PURE__*/ React.createElement("span", {
+        className: "w-2 h-2 bg-purple-400 rounded-full"
+    }), /*#__PURE__*/ React.createElement("p", {
+        className: "text-sm text-gray-700"
+    }, "스스로 주제 선택하여 탐구"))))));
+}
+
+  return typeof AILiteracyIndirectValue !== 'undefined' ? AILiteracyIndirectValue : null;
+})();
+
+        console.log('Component type:', typeof Component);
+        console.log('Component:', Component);
+
+        // 컴포넌트 렌더링
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+
+        if (Component) {
+          // Component가 함수나 클래스인지 확인
+          if (typeof Component === 'function') {
+            root.render(React.createElement(Component));
+          } else {
+            console.error('Component is not a function:', Component);
+            throw new Error('Component is not a valid React component');
+          }
+        } else {
+          throw new Error('No component found in the transpiled code');
+        }
+      } catch (error) {
+        console.error('Render error:', error);
+        document.body.innerHTML = '<div style="color: red; padding: 20px;">Error rendering component: ' + error.message + '</div>';
+      }
+    });
+  </script>
+</body>
+</html>

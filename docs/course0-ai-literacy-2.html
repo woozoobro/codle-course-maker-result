@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <title>course0-ai-literacy-2</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React 라이브러리 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <style>
+    
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-1Thin.woff2') format('woff2');
+      font-weight: 100;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-2ExtraLight.woff2') format('woff2');
+      font-weight: 200;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-3Light.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-4Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-5Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-6SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-7Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-8ExtraBold.woff2') format('woff2');
+      font-weight: 800;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Paperlogy';
+      src: url('./fonts/Paperlogy-9Black.woff2') format('woff2');
+      font-weight: 900;
+      font-style: normal;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Paperlogy', system-ui, -apple-system, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    // React와 ReactDOM이 로드될 때까지 대기
+    const waitForReact = () => {
+      return new Promise((resolve) => {
+        const check = () => {
+          if (typeof React !== 'undefined' && typeof ReactDOM !== 'undefined') {
+            resolve();
+          } else {
+            setTimeout(check, 10);
+          }
+        };
+        check();
+      });
+    };
+
+    waitForReact().then(() => {
+      try {
+        // React hooks를 window 객체에 바인딩 (iframe 내부에서 접근 가능하도록)
+        window.React = React;
+        window.useState = React.useState;
+        window.useEffect = React.useEffect;
+        window.useRef = React.useRef;
+        window.useCallback = React.useCallback;
+        window.useMemo = React.useMemo;
+        window.useContext = React.useContext;
+        window.useReducer = React.useReducer;
+        window.useLayoutEffect = React.useLayoutEffect;
+
+        // 유용한 JavaScript 함수들을 전역으로 노출
+        window.Math = Math;
+        window.Date = Date;
+        window.setTimeout = setTimeout;
+        window.setInterval = setInterval;
+        window.clearTimeout = clearTimeout;
+        window.clearInterval = clearInterval;
+        window.requestAnimationFrame = requestAnimationFrame;
+        window.cancelAnimationFrame = cancelAnimationFrame;
+
+        // 자주 사용되는 유틸리티 함수들 추가
+        window.getPosition = (angle, radius, rotation = 0) => {
+          const rad = (angle * Math.PI) / 180;
+          const x = radius * Math.cos(rad);
+          const y = radius * Math.sin(rad);
+          return {
+            transform: `translate(${x}px, ${y}px) rotate(${rotation}deg)`
+          };
+        };
+
+        // 애니메이션 관련 헬퍼
+        window.animate = {
+          spring: (value, config = {}) => {
+            const { stiffness = 100, damping = 10 } = config;
+            return `transition: all ${damping/10}s cubic-bezier(0.68, -0.55, 0.265, 1.55)`;
+          },
+          stagger: (index, baseDelay = 100) => {
+            return index * baseDelay;
+          }
+        };
+
+        // IIFE로 래핑된 코드 실행하여 컴포넌트 가져오기
+        const Component = (function() {
+  // React Hooks 바인딩
+  const { useState, useEffect, useRef, useCallback, useMemo, useContext, useReducer, useLayoutEffect } = window;
+
+  // 자주 사용되는 전역 객체/함수들을 로컬 스코프에 바인딩
+  const { Math, Date, setTimeout, setInterval, clearTimeout, clearInterval, requestAnimationFrame, cancelAnimationFrame } = window;
+
+  // 커스텀 유틸리티 함수들 (있는 경우)
+  const getPosition = window.getPosition;
+  const animate = window.animate;
+
+  "use client"; // 이건 테스트할 때만 들어감. supabase에 저장된 코드엔 필요 없음.
+function AILiteracyVennDiagram() {
+    const [mounted, setMounted] = useState(false);
+    useEffect(()=>{
+        requestAnimationFrame(()=>{
+            requestAnimationFrame(()=>{
+                setMounted(true);
+            });
+        });
+    }, []);
+    return /*#__PURE__*/ React.createElement("div", {
+        className: "h-screen w-screen overflow-hidden bg-white bg-[radial-gradient(circle,#e5e7eb_0.2px,transparent_1.8px)] bg-[length:60px_60px]"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "h-full flex flex-col items-center justify-center p-8"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: `text-center mt-8 transition-all duration-1000 ease-out ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`
+    }, /*#__PURE__*/ React.createElement("h1", {
+        className: "text-4xl font-bold text-gray-800 whitespace-nowrap"
+    }, "두 가지 관점으로 이해하는 AI 리터러시")), /*#__PURE__*/ React.createElement("div", {
+        className: "relative w-full max-w-5xl mx-auto"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "absolute inset-0 opacity-5"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "w-full h-full",
+        style: {
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #d1d5db 1px, transparent 0)',
+            backgroundSize: '40px 40px'
+        }
+    })), /*#__PURE__*/ React.createElement("div", {
+        className: "relative flex items-center justify-center h-[28rem]"
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: `relative w-96 h-96 rounded-full border-4 border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`,
+        style: {
+            transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            transitionDelay: '500ms'
+        }
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "absolute left-14 top-1/2 transform -translate-y-1/2 text-left"
+    }, /*#__PURE__*/ React.createElement("h2", {
+        className: "text-3xl font-bold text-blue-400 mb-4"
+    }, "AI"), /*#__PURE__*/ React.createElement("div", {
+        className: "text-base text-gray-600 space-y-2"
+    }, /*#__PURE__*/ React.createElement("p", null, "• 기술적 원리"), /*#__PURE__*/ React.createElement("p", null, "• 실용적 도구"), /*#__PURE__*/ React.createElement("p", null, "• 사회문화적 영향")))), /*#__PURE__*/ React.createElement("div", {
+        className: `relative w-96 h-96 rounded-full border-4 border-green-200 bg-gradient-to-bl from-green-50 to-green-100 -ml-28 ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`,
+        style: {
+            transition: 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            transitionDelay: '900ms'
+        }
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "absolute right-14 top-1/2 transform -translate-y-1/2 text-right"
+    }, /*#__PURE__*/ React.createElement("h2", {
+        className: "text-3xl font-bold text-green-400 mb-4"
+    }, "Literacy"), /*#__PURE__*/ React.createElement("div", {
+        className: "text-base text-gray-600 space-y-2"
+    }, /*#__PURE__*/ React.createElement("p", null, "이해 •"), /*#__PURE__*/ React.createElement("p", null, "활용 •"), /*#__PURE__*/ React.createElement("p", null, "비판적 사고 •")))), /*#__PURE__*/ React.createElement("div", {
+        className: `absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-1000 ease-out ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`,
+        style: {
+            transitionDelay: '2200ms'
+        }
+    }, /*#__PURE__*/ React.createElement("div", {
+        className: "bg-white rounded-2xl border-2 border-gray-200 px-8 py-6 shadow-lg text-center"
+    }, /*#__PURE__*/ React.createElement("h3", {
+        className: "text-3xl font-bold text-gray-800 mb-2"
+    }, "AI Literacy"), /*#__PURE__*/ React.createElement("p", {
+        className: "text-lg text-gray-600 font-medium"
+    }, "AI 리터러시"), /*#__PURE__*/ React.createElement("div", {
+        className: "w-16 h-1 bg-gradient-to-r from-blue-300 to-green-300 mx-auto mt-3 rounded-full"
+    })))), /*#__PURE__*/ React.createElement("div", {
+        className: `absolute top-1/2 left-1/4 w-16 h-px bg-gradient-to-r from-blue-200 to-transparent transition-all duration-1000 ease-out ${mounted ? 'opacity-60' : 'opacity-0'}`,
+        style: {
+            transitionDelay: '1600ms'
+        }
+    }), /*#__PURE__*/ React.createElement("div", {
+        className: `absolute top-1/2 right-1/4 w-16 h-px bg-gradient-to-l from-green-200 to-transparent transition-all duration-1000 ease-out ${mounted ? 'opacity-60' : 'opacity-0'}`,
+        style: {
+            transitionDelay: '1600ms'
+        }
+    }))));
+}
+
+  return typeof AILiteracyVennDiagram !== 'undefined' ? AILiteracyVennDiagram : null;
+})();
+
+        console.log('Component type:', typeof Component);
+        console.log('Component:', Component);
+
+        // 컴포넌트 렌더링
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+
+        if (Component) {
+          // Component가 함수나 클래스인지 확인
+          if (typeof Component === 'function') {
+            root.render(React.createElement(Component));
+          } else {
+            console.error('Component is not a function:', Component);
+            throw new Error('Component is not a valid React component');
+          }
+        } else {
+          throw new Error('No component found in the transpiled code');
+        }
+      } catch (error) {
+        console.error('Render error:', error);
+        document.body.innerHTML = '<div style="color: red; padding: 20px;">Error rendering component: ' + error.message + '</div>';
+      }
+    });
+  </script>
+</body>
+</html>
